@@ -1,0 +1,98 @@
+body{
+  background-color: black;
+  color: azure;
+}
+
+.category-container,
+.meal-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 150px;
+  border-radius: 10px;
+  padding: 10px 5px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(227, 206, 206, 0.2);
+}
+
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 8px 18px rgba(236, 166, 166, 0.35);
+}
+
+
+.card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.card p {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: lowercase;
+  background: linear-gradient(to top, black 20%, transparent);
+  padding: 5px;
+  border-radius: 5px;
+  color:white;
+}
+
+.popup-overlay{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  height: auto;
+  background: rgba(78, 72, 72, 0.904);
+  z-index: 999;
+}
+
+.popup-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.popup-head img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn{
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: tomato;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
