@@ -1,8 +1,23 @@
-body{
-  background-color: black;
-  color: azure;
+body {
+  background: white;
+  color: black;
+  transition: 0.3s;
 }
 
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+/* Fix cards also */
+body.dark .card {
+  background: #1e1e1e;
+  color: white;
+}
+
+body.dark .navbar {
+  background: #1e1e1e;
+}
 .category-container,
 .meal-container {
   display: flex;
@@ -94,5 +109,17 @@ body{
   cursor: pointer;
 }
 
+.card {
+  transition: 0.3s;
+  cursor: pointer;
+}
 
+.card:hover {
+  transform: scale(1.05);
+}
+
+button {
+  margin-top: 5px;
+  cursor: pointer;
+}
 
