@@ -40,6 +40,7 @@ npm install
 npm start
 
 🌐 API Used
+
 The application fetches data from:
 TheMealDB API
 
