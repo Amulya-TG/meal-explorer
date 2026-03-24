@@ -65,7 +65,7 @@ body.dark .navbar svg {
   width: 120px;
   height: 120px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   transition: 0.3s ease;
 }
 
@@ -121,15 +121,6 @@ body.dark .navbar svg {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-.card {
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: scale(1.05);
 }
 
 button {
@@ -216,4 +207,13 @@ button {
   height: 20px;
 }
 
+.btn{
+  border: none;
+  background: none;
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+}
 
