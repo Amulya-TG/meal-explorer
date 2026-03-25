@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState,useEffect } from "react";
+import Meal from "./pages/Meal";
+import Meals from "./pages/Meals"; 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Navbar from "./components/Navbar";
@@ -27,14 +29,21 @@ function App() {
       />
 
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/meal"
           element={
-            <Home
-              meals={meals}     
-              setMeals={setMeals}
-              selectedCategory={selectedCategory}
+            <Meal
               setSelectedCategory={setSelectedCategory}
+            />
+          }
+        />
+        <Route
+          path="/meal/:category"
+          element={
+            <Meals
+              meals={meals}
+              setMeals={setMeals}
             />
           }
         />
