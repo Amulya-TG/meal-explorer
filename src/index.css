@@ -28,6 +28,12 @@ body.dark .navbar svg {
   color: goldenrod;
 }
 
+
+.home-page{
+  margin-top: 30px;
+  text-align: center;
+  font-size: 32px;
+}
 .container{
   margin-top: 40px;
 }
@@ -85,6 +91,7 @@ body.dark .navbar svg {
 
 .popup-overlay{
   position: fixed;
+  right: 20px;
   top: 20px;
   left: 20px;
   padding: 10px 20px;
