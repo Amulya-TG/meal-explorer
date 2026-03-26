@@ -11,14 +11,17 @@ import RecipePopup from "../components/RecipePopup";
 const Meals = ({ meals, setMeals }) => {
   const { category } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
   if (!category || category === "search") return;
 
   const loadMeals = async () => {
     try {
+      setLoading(true);
       const data = await fetchMealsByCategory(category);
       setMeals(data.meals || []);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -34,9 +37,11 @@ const Meals = ({ meals, setMeals }) => {
   return (
     <div className="container">
       <h1>{category} Meals</h1>
-      {meals.length === 0 && <p>No meals found</p>}
-
-      <div className="meal-container">
+      {
+        loading ? (
+          <h2>Loading..</h2>
+        ):(
+          <div className="meal-container">
         {meals.map((meal) => (
           <MealCard
             key={meal.idMeal}
@@ -45,6 +50,11 @@ const Meals = ({ meals, setMeals }) => {
           />
         ))}
       </div>
+        )
+      }
+      
+
+      
 
       {recipe && (
         <RecipePopup
