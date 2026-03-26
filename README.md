@@ -21,13 +21,20 @@ A React.js web application that allows users to explore different meal categorie
 - API: TheMealDB API
 - Styling: CSS
 
-📌 How It Works
+### 📌 How It Works
 
-- The app loads meal categories from the API.
-- When a user clicks a category, it shows all dishes in that category.
-- Clicking a dish opens a detailed recipe page with cooking instructions.
+- Home Page
+    → Welcome screen
+- Meal Page
+    → Displays all meal categories
+- Meals Page
+    → Shows meals based on selected category
+- Search
+    → Displays filtered meals
+- Recipe Popup
+    → Shows full cooking instructions
 
-⚙️ Installation
+### ⚙️ Installation
 
 - Clone the repository:
 git clone https://github.com/Amulya-TG/Meal-Explorer.git
@@ -41,12 +48,12 @@ npm install
 - Start the development server:
 npm run dev
 
-🌐 API Used
+### 🌐 API Used
 
 The application fetches data from:
 - 👉 https://www.themealdb.com/
 
-🎯 Learning Outcome
+### 🎯 Learning Outcome
 
 Through this project I practiced:
 - Working with React components
@@ -55,11 +62,11 @@ Through this project I practiced:
 - Building dynamic UI
 - Handling user interactions
 
-📂 Future Improvements
+### 📂 Future Improvements
 
 - Search suggestions (auto-complete)
 - Fully responsive mobile navbar
 - Filter by area (country cuisine)
 - User authentication
 
-⭐ If you like this project, feel free to give it a star!
+### ⭐ If you like this project, feel free to give it a star!
