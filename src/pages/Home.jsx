@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const Home = ({ setSelectedCategory }) => {
   const [categories, setCategories] = useState([]);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
+
   const navigate = useNavigate();
-  const scrollRef = useRef();
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -15,15 +18,18 @@ const Home = ({ setSelectedCategory }) => {
     loadData();
   }, []);
 
-  const scroll = (direction) => {
-    const { current } = scrollRef;
-    const scrollAmount = 250;
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    setShowLeft(el.scrollLeft > 0);
+    setShowRight(el.scrollLeft < el.scrollWidth - el.clientWidth);
+  };
 
-    if (direction === "left") {
-      current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    } else {
-      current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+  const scroll = (dir) => {
+    const amount = 250;
+    scrollRef.current.scrollBy({
+      left: dir === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -41,8 +47,10 @@ const Home = ({ setSelectedCategory }) => {
       </div>
 
       <div className="scroll-container">
-        <button className="scroll-btn left" onClick={() => scroll("left")}>‹</button>
-        <div className="scroll-row" ref={scrollRef}>
+        {showLeft && (
+          <button className="scroll-btn left" onClick={() => scroll("left")}>‹</button>
+        )}
+        <div className="scroll-row" ref={scrollRef} onScroll={checkScroll}>
           {categories.map((cat) => (
             <div
               key={cat.idCategory}
@@ -52,12 +60,14 @@ const Home = ({ setSelectedCategory }) => {
                 navigate(`/meal/${cat.strCategory}`);
               }}
             >
-              <img src={cat.strCategoryThumb} alt="" />
+              <img src={cat.strCategoryThumb} alt={cat.strCategory} loading="lazy"/>
               <p>{cat.strCategory}</p>
             </div>
           ))}
         </div>
-        <button className="scroll-btn right" onClick={() => scroll("right")}>›</button>
+        {showRight && (
+          <button className="scroll-btn right" onClick={() => scroll("right")}>›</button>
+        )}
       </div>
     </div>
   );
