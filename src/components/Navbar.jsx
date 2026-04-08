@@ -1,5 +1,3 @@
-
-
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -13,7 +11,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
       <nav className="navbar">
         <div className="nav-logo" onClick={() => navigate("/")}>
           <span className="meal">🍽 Meal</span>
-        <span className="explorer">Explorer</span>
+          <span className="explorer">Explorer</span>
         </div>
 
         <div className="nav-right">
@@ -27,20 +25,22 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         </div>
       </nav>
 
-      {/* FULL SCREEN MOBILE MENU */}
+      {menuOpen && (
+        <div className="overlay" onClick={() => setMenuOpen(false)}></div>
+      )}
+
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <div className="menu-header">
           <h2>Menu</h2>
           <span onClick={() => setMenuOpen(false)}>✕</span>
         </div>
-
-        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home </Link>
         <Link to="/meal" onClick={() => setMenuOpen(false)}>Meals</Link>
         <Link to="/favorites" onClick={() => setMenuOpen(false)}>Favorites</Link>
 
         {user ? (
           <button
-          style={{ fontFamily: "serif" }}
+            style={{ fontFamily: "serif" }}
             onClick={() => {
               localStorage.removeItem("user");
               navigate("/");
