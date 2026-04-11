@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const MealCard = ({ meal, onClick }) => {
   const [isFav, setIsFav] = useState(false);
@@ -33,17 +34,16 @@ const MealCard = ({ meal, onClick }) => {
   };
 
   return (
-    <div className="meal-card" onClick={onClick}>
+    <motion.div className="meal-card"  whileHover={{ scale: 1.05 }} onClick={onClick}>
       <img src={meal.strMealThumb} alt={meal.strMeal} />
-
-      <div className="meal-overlay">
-        <h3>{meal.strMeal}</h3>
-      </div>
-
       <button className="fav-btn" onClick={toggleFavorite}>
         {isFav ? "❤️" : "🤍"}
       </button>
-    </div>
+
+      <div className="hover-overlay">
+        <h3>{meal.strMeal}</h3>
+      </div>
+    </motion.div>
   );
 };
 

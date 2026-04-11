@@ -3,8 +3,16 @@ import { useState } from "react";
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+
+    const handleSearch = (e) => {
+    e.preventDefault();
+    if (!search.trim()) return;
+    navigate(`/meal/search?q=${search}`);
+    setSearch("");
+  };
 
   return (
     <>
@@ -13,6 +21,15 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           <span className="meal">🍽 Meal</span>
           <span className="explorer">Explorer</span>
         </div>
+
+        <form className="nav-search" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search meals..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </form>
 
         <div className="nav-right">
           <button onClick={() => setDarkMode(!darkMode)} className="mode-btn">
