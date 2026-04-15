@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import {
-  fetchMealsByCategory,
-  fetchRecipeDetails,
-  searchMeals,
-} from "../services/api";
+import { useParams } from "react-router-dom";
+import { fetchMealsByCategory, fetchRecipeDetails } from "../services/api";
 import { useNavigate } from "react-router-dom";
-
 import MealCard from "../components/MealCard";
 import RecipePopup from "../components/RecipePopup";
 
@@ -14,27 +9,20 @@ const Meals = ({ meals, setMeals }) => {
   const { category } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
+
   const navigate = useNavigate();
 
-  const queryParams = new URLSearchParams(location.search);
-  const searchQuery = queryParams.get("q");
   useEffect(() => {
     if (!category || category === "search") return;
-
     const loadMeals = async () => {
       try {
         setLoading(true);
-        if (category === "search" && searchQuery) {
-          const data = await fetchMealsByCategory(category);
-          setMeals(data.meals || []);
-        } else if (category) {
-          const data = await fetchMealsByCategory(category);
-          setMeals(data.meals || []);
-        }
+        const data = await fetchMealsByCategory(category);
+        setMeals(data.meals || []);
         setLoading(false);
       } catch (err) {
         console.log(err);
+        setLoading(false);
       }
     };
     loadMeals();
@@ -42,25 +30,26 @@ const Meals = ({ meals, setMeals }) => {
 
   const handleRecipe = async (id) => {
     const user = localStorage.getItem("user");
-
     if (!user) {
       alert("Please login to view recipe");
       navigate("/login");
       return;
     }
-
     const data = await fetchRecipeDetails(id);
     setRecipe(data.meals[0]);
   };
 
+  const displayTitle = category === "search"
+    ? (meals.length > 0 ? `${meals.length} result${meals.length !== 1 ? 's' : ''}` : "No results found")
+    : `${category} Meals`;
+
   return (
     <div className="container">
-      <h1>
-        {searchQuery ? `Results for "${searchQuery}"` : `${category} Meals`}
-      </h1>
+      <h1>{displayTitle}</h1>
+
       {loading ? (
-        <h2>Loading..</h2>
-      ) : meals.length === 0 ? (
+        <h2>Loading...</h2>
+      ) : meals.length === 0 && category === "search"? (
         <p>No meals found</p>
       ) : (
         <div className="meal-container">
@@ -75,7 +64,10 @@ const Meals = ({ meals, setMeals }) => {
       )}
 
       {recipe && (
-        <RecipePopup recipe={recipe} onClose={() => setRecipe(null)} />
+        <RecipePopup
+          recipe={recipe}
+          onClose={() => setRecipe(null)}
+        />
       )}
     </div>
   );
