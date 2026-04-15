@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Meal from "./pages/Meal";
-import Meals from "./pages/Meals"; 
+import Meals from "./pages/Meals";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Navbar from "./components/Navbar";
@@ -26,28 +26,22 @@ function App() {
       <Navbar
         darkMode={darkMode}
         setDarkMode={setDarkMode}
-        setMeals={setMeals}      
-        setSelectedCategory={setSelectedCategory} 
+        setMeals={setMeals}
+        setSelectedCategory={setSelectedCategory}
       />
 
       <Routes>
-        <Route path="/" element={<Home setSelectedCategory={setSelectedCategory} />} />
+        <Route
+          path="/"
+          element={<Home setSelectedCategory={setSelectedCategory} />}
+        />
         <Route
           path="/meal"
-          element={
-            <Meal
-              setSelectedCategory={setSelectedCategory}
-            />
-          }
+          element={<Meal setSelectedCategory={setSelectedCategory} />}
         />
         <Route
           path="/meal/:category"
-          element={
-            <Meals
-              meals={meals}
-              setMeals={setMeals}
-            />
-          }
+          element={<Meals meals={meals} setMeals={setMeals} />}
         />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/login" element={<Login />} />
