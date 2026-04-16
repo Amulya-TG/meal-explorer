@@ -16,11 +16,30 @@ export const fetchRecipeDetails = async (id) => {
 };
 
 export const searchMeals = async (query) => {
-  if (!query) return { meals: [] };
+  if (!query || !query.trim()) return { meals: [] };
 
-  const res = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
-  );
-  const data = await res.json();
-  return data;
+  const trimmed = query.trim();
+
+  try {
+    // Search by meal name (case-insensitive on API side)
+    const nameRes = await fetch(`${BASE_URL}/search.php?s=${encodeURIComponent(trimmed)}`);
+    const nameData = await nameRes.json();
+    const nameResults = nameData.meals || [];
+
+    const ingRes = await fetch(`${BASE_URL}/filter.php?i=${encodeURIComponent(trimmed)}`);
+    const ingData = await ingRes.json();
+    const ingResults = ingData.meals || [];
+
+    // Merge: name results first, then ingredient results
+    const seen = new Set(nameResults.map((m) => m.idMeal));
+    const merged = [
+      ...nameResults,
+      ...ingResults.filter((m) => !seen.has(m.idMeal)),
+    ];
+
+    return { meals: merged.length > 0 ? merged : null };
+  } catch (err) {
+    console.error("Search error:", err);
+    return { meals: null };
+  }
 };
