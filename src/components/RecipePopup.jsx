@@ -1,18 +1,19 @@
-import { motion } from "framer-motion";
-
 const RecipePopup = ({ recipe, onClose }) => {
   return (
-    <div className="popup-overlay" onClick={onClose}>
-      <motion.div className="popup-content"
-        initial={{ scale: 0.7, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <span className="close-btn" onClick={onClose}>✖</span>
-        <img src={recipe.strMealThumb} alt="" />
+    <div className="popup-overlay">
+      <div className="popup-head">
         <h2>{recipe.strMeal}</h2>
+        <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+      </div>
+
+      <div>
+        <h3>Instructions</h3>
         <p>{recipe.strInstructions}</p>
-      </motion.div>
+      </div>
+
+      <button className="popup-close-btn" onClick={onClose}>
+        Close ✕
+      </button>
     </div>
   );
 };
