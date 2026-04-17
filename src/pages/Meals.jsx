@@ -39,9 +39,12 @@ const Meals = ({ meals, setMeals }) => {
     setRecipe(data.meals[0]);
   };
 
-  const displayTitle = category === "search"
-    ? (meals.length > 0 ? `${meals.length} result${meals.length !== 1 ? 's' : ''}` : "No results found")
-    : `${category} Meals`;
+  const displayTitle =
+    category === "search"
+      ? meals.length > 0
+        ? `${meals.length} result${meals.length !== 1 ? "s" : ""} found`
+        : "No results found"
+      : `${category} Meals`;
 
   return (
     <div className="container">
@@ -50,7 +53,10 @@ const Meals = ({ meals, setMeals }) => {
       {loading ? (
         <h2>Loading...</h2>
       ) : meals.length === 0 && category === "search"? (
-        <p>No meals found</p>
+        <div className="empty-state">
+          <p>No meals found for your search.</p>
+          <p>Try searching for an ingredient or a different meal name.</p>
+        </div>
       ) : (
         <div className="meal-container">
           {meals.map((meal) => (

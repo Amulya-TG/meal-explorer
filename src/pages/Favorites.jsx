@@ -13,7 +13,10 @@ const Favorites = () => {
     <div className="container">
       <h1>❤️ Favorites</h1>
       {favorites.length === 0 ? (
-        <p>No favorites yet</p>
+        <div className="empty-state">
+          <p>No favorites yet.</p>
+          <p>Browse meals and tap ❤️ to save them here!</p>
+        </div>
       ) : (
         <div className="meal-container">
           {favorites.map((meal) => (
